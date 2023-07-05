@@ -1,0 +1,814 @@
+.node--profile--full {
+  @include center-me(128rem);
+  overflow: hidden;
+
+  .profile-container {
+    margin-inline: 2rem;
+    display: inline;
+
+    .top {
+      .profile-slider {
+        margin-inline-start: -2rem;
+
+        .slick-slide {
+          max-width: 52rem;
+          margin-inline: 0.5rem;
+
+          img {
+            object-fit: cover;
+            min-height: 25rem;
+          }
+        }
+      }
+
+      @media #{$medish} {
+        .profile-slider {
+          margin-inline-start: 0;
+
+          .slick-slide {
+            min-width: unset;
+            margin-inline-start: unset;
+
+            img {
+              height: 36rem;
+              //width: 51.5rem;
+              //padding: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .bottom {
+      position: relative;
+
+      .info {
+        background-color: var(--white);
+        margin-inline: 2.5rem;
+
+        .header {
+          display: flex;
+          margin-block-end: 2rem;
+
+          .slider-nav {
+            position: relative;
+            top: 3.5rem;
+            left: 1rem;
+            display: inline-flex;
+            height: 4rem;
+            flex: 1;
+
+            .slick-prev-button {
+              margin-inline-end: 1rem;
+
+              .slick-prev-icon {
+                color: var(--sea);
+                margin-top: -0.5rem;
+                font-size: 3rem;
+
+                &:after {
+                  content: '\e902';
+                }
+              }
+
+              &:focus, &:hover {
+                transform: translate(10%, -40%);
+                margin-inline-start: -1.5rem;
+              }
+            }
+
+            .slick-next-button {
+              margin-inline-start: 1rem;
+
+              .slick-next-icon {
+                color: var(--sea);
+                margin-top: -0.5rem;
+                font-size: 3rem;
+
+                &:after {
+                  content: "\e903";
+                }
+              }
+
+              &:focus, &:hover {
+                transform: translate(-45%, -40%);
+                margin-inline-start: 2rem;
+              }
+            }
+
+            .slick-prev-button,
+            .slick-next-button {
+              display: block;
+              padding: 0;
+              height: 20px;
+              width: 20px;
+              line-height: 0;
+              font-size: 0;
+              cursor: pointer;
+              background: 0 0;
+              color: transparent;
+              border: none;
+              transform: translate(0, -50%);
+
+              &:focus, &:hover {
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                background-color: var(--lightest-sky);
+                transition: background-color .3s ease;
+                cursor: pointer;
+                margin-block-start: 0.5rem;
+                padding-bottom: 1rem;
+                margin-inline-end: 0.5rem;
+              }
+
+              .slick-prev-icon,
+              .slick-next-icon {
+                &:after {
+                  font-family: vsc !important;
+                  speak: never;
+                  font-style: normal;
+                  font-weight: 400;
+                  font-variant: normal;
+                  text-transform: none;
+                  line-height: 1;
+                  -webkit-font-smoothing: antialiased;
+                  -moz-osx-font-smoothing: grayscale;
+                  color: var(--sea);
+                  font-size: 1.4rem;
+                  display: inline-block;
+                  margin-block-start: 1.5rem;
+                  position: relative;
+                  z-index: 3;
+                }
+              }
+
+            }
+
+            .slick-dots-profiles {
+              margin-block-start: -1.7rem;
+              margin-inline: 1rem;
+
+              ul.slick-dots {
+                position: unset;
+
+                li {
+                  margin: 0;
+
+                  &.slick-active {
+                    button {
+                      &:focus {
+                        &:before {
+                          color: var(--sea);
+                        }
+                      }
+
+                      .slick-dot-icon:before {
+                        color: var(--sea);
+                        font-weight: 900;
+                        font-size: 3rem;
+                        margin: -4px 0 0 -3px;
+                        transition: width 0.8s ease;
+                      }
+                    }
+                  }
+
+                  button {
+                    width: 2.9rem;
+
+                    &:hover, &:focus {
+                      .slick-dot-icon:before {
+                        color: var(--sea);
+                        font-weight: 900;
+                        font-size: 3rem;
+                        margin: -4px 0 0 -3px;
+                      }
+                    }
+
+                    .slick-dot-icon {
+                      color: var(--light-sky);
+                      opacity: 1;
+
+                      &:before {
+                        font-family: var(--font-family-base);
+                        content: "\2014";
+                        font-size: 2.5rem;
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .tour {
+            flex: 1;
+            text-align: right;
+
+            .button--360 {
+              padding: 0;
+              border: 0;
+              background-color: transparent;
+              width: 21rem;
+              margin-block-start: 3rem;
+              margin-inline-end: 5rem;
+
+              @media #{$medish} {
+                float: right;
+              }
+
+              &:before {
+                content: "";
+                position: relative;
+                background-image: image-url('360.png');
+                background-repeat: no-repeat;
+                background-size: 6.5rem;
+                width: 6.5rem;
+                height: 3.5rem;
+                display: inline-block;
+              }
+
+              > span {
+                color: var(--sea);
+                font-weight: 600;
+                width: 15rem;
+              }
+            }
+
+            // Overlay
+            .overlay--360 {
+              display: none;
+
+              &.opened {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 502; // Covers drupal admin for close button
+                display: block;
+                height: 100%;
+                width: 100%;
+                background-color: var(--white);
+
+                span.overlay-title {
+                  text-align: left;
+                  float: left;
+                  width: 100%;
+                  margin-inline-start: 10%;
+                  margin-block-start: 7%;
+                  font-size: 2.6rem;
+                  font-weight: 700;
+                  color: var(--sea);
+                }
+
+                .overlay--close {
+                  position: absolute;
+                  top: 5.5rem;
+                  right: 3rem;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  cursor: pointer;
+
+                  span.close-x {
+                    font-size: 3rem;
+                    color: var(--sky);
+                  }
+
+                  span.close {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                  }
+                }
+
+                iframe {
+                  position: absolute;
+                  height: 60%;
+                  width: 80%;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  z-index: 1;
+                }
+
+                &:before {
+                  content: "";
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  background-image: image-url('dots-crop-360.svg');
+                  background-repeat: no-repeat;
+                  background-size: 25rem;
+                  width: 100%;
+                  height: 100%;
+                  z-index: 0;
+                }
+
+                &:after {
+                  content: "";
+                  position: absolute;
+                  background-image: image-url('top-hero-illo-360.svg');
+                  background-repeat: no-repeat;
+                  background-size: 43rem;
+                  width: 40rem;
+                  height: 40rem;
+                  z-index: 0;
+                  bottom: 0;
+                  right: 0;
+                  transform: scaley(-1);
+                }
+              }
+            }
+          }
+        }
+
+        .content {
+          display: flex;
+          flex-direction: column;
+
+          .title {
+            font-size: 4.2rem;
+            color: var(--stone);
+            line-height: calc(50 / 42);
+            letter-spacing: 1.26px;
+            margin-block: 1rem 2rem;
+            flex: 1;
+            width: 100%;
+          }
+
+          .cta {
+            > a {
+              margin-inline-end: 1.5rem;
+            }
+          }
+
+          .address, .phone, .email {
+            color: var(--stone);
+            font-size: 1.8rem;
+            line-height: calc(20 / 18);
+            margin-block: 0.5rem;
+
+            &:before {
+              content: "";
+              position: relative;
+              top: 0;
+              left: 0;
+              background-image: image-url('location-dot-regular.svg');
+              background-repeat: no-repeat;
+              background-position: left center;
+              background-size: 1.5rem;
+              width: 1.5rem;
+              height: 1.5rem;
+              padding-inline-end: 2.5rem;
+            }
+          }
+
+          .address {
+            &:before {
+              background-image: image-url('location-dot-regular.svg');
+            }
+          }
+
+          .phone {
+            &:before {
+              background-image: image-url('phone-light.svg');
+            }
+          }
+
+          .email {
+            &:before {
+              background-image: image-url('envelope-regular.svg');
+            }
+          }
+
+          .phone, .email {
+            a {
+              text-decoration: none;
+            }
+          }
+
+          .social-media {
+            margin-block: 2rem;
+
+            a.facebook {
+              background-image: image-url('ftr-fb.png');
+            }
+
+            a.twitter {
+              background-image: image-url('ftr-tw.png');
+            }
+
+            a.youtube {
+              background-image: image-url('ftr-yt.png');
+            }
+
+            a.instagram {
+              background-image: image-url('ftr-ig.png');
+            }
+
+            a {
+              display: inline-block;
+              width: 4rem;
+              height: 4rem;
+              background-size: 100%;
+              background-repeat: no-repeat;
+              border-radius: 50%;
+              text-decoration: none;
+              margin-inline-end: 0.5rem;
+
+              &:hover {
+                background-color: color-mix(in srgb, var(--sky) 15%, var(--white));
+              }
+
+              span {
+                position: absolute !important;
+                height: 1px;
+                width: 1px;
+                overflow: hidden;
+                clip: rect(1px, 1px, 1px, 1px);
+                word-wrap: normal;
+              }
+            }
+          }
+
+          .header {
+            display: none;
+          }
+
+          .description {
+            font-size: 1.6rem;
+            line-height: calc(24 / 16);
+            margin-block: 1rem 3rem;
+          }
+        }
+      }
+
+      .amenities {
+        span {
+          color: var(--sea);
+          margin-block-end: 3rem;
+          display: block;
+          font-size: 2.8rem;
+          font-weight: 700;
+          line-height: calc(34 / 28);
+        }
+
+        .amenity-wrapper {
+          .amenity {
+            margin-inline: 1rem 5rem;
+            margin-block-end: 2rem;
+            max-width: 25rem;
+
+            ul {
+              list-style: none;
+              margin-block-start: 0;
+              padding-inline-start: 1.5rem;
+              letter-spacing: 0.48px;
+              line-height: calc(20 / 16);
+              margin-block-end: 1rem;
+
+              li {
+                margin-block-end: 1.5rem;
+              }
+            }
+          }
+
+          p {
+            background: rgba(var(--light-sky-rgb), 0.5) 0 0 no-repeat padding-box;
+            border-radius: 25px;
+            opacity: 1;
+            width: auto;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.45px;
+            line-height: calc(34 / 18);
+            color: var(--sea);
+            padding: 0 1.5rem;
+            margin-block-end: 1rem;
+            display: inline-block;
+          }
+
+          @media #{$medish} {
+            display: flex;
+            flex-wrap: wrap;
+
+            .amenity {
+              width: 40%;
+            }
+          }
+
+        }
+      }
+
+      .map {
+        #listings-map {
+          min-width: 39rem;
+          min-height: 32rem;
+          width: 100%;
+          z-index: 0;
+
+          .leaflet-popup-content:after {
+            content: 'Location';
+            display: block;
+            height: 1rem;
+            width: 3rem;
+          }
+
+          .leaflet-popup-content article {
+            display: none;
+          }
+        }
+
+        &.no-map {
+          #listings-map {
+            width: 100%;
+            //margin-inline-start: 2rem;
+          }
+        }
+
+        .profile-slider {
+          display: none;
+        }
+      }
+
+      .profile-slider {
+        display: none;
+      }
+
+      @media #{$medish} {
+        display: flex;
+        flex-direction: row;
+        top: -7rem;
+        margin-inline-start: -1px;
+
+        .info {
+          width: 57%;
+          padding-inline-start: 4.5rem;
+          margin-block-start: -8rem;
+          margin-inline: unset;
+
+          .content {
+            overflow: auto;
+            max-height: 82rem;
+            padding-inline-end: 4rem;
+          }
+        }
+
+        .map {
+          width: 43%;
+          min-height: 32rem;
+          margin-inline-start: 0;
+
+          #listings-map {
+            min-height: 80rem;
+            margin-inline-start: unset;
+            width: unset;
+          }
+
+          &.no-map {
+            width: 62%;
+            margin-inline-start: 5rem;
+            margin-block-start: 4rem;
+          }
+        }
+      }
+    }
+
+    @media #{$medish} {
+      margin-inline: 0;
+      display: unset;
+    }
+
+    &.single-slide {
+      .top {
+        .profile-slider {
+          display: none;
+        }
+      }
+
+      .bottom {
+        display: flex;
+        flex-direction: column;
+
+        .map {
+          order: 3;
+
+          > .profile-slider{
+            display: none;
+          }
+
+          #listings-map {
+            width: 100%;
+            margin-inline-start: 0;
+          }
+        }
+
+        .info {
+          order: 2;
+
+          >.header {
+            display: none;
+          }
+
+          .slider-nav {
+            display: none;
+          }
+
+          .content {
+            .header {
+              display: block;
+              margin-block: -2rem 1rem;
+
+              .button--360 {
+                margin-block: 0;
+              }
+            }
+
+            .tour {
+              flex: 1;
+              text-align: right;
+              margin-block-end: -4rem;
+              right: -4rem;
+              top: -5rem;
+              position: relative;
+
+              .button--360 {
+                padding: 0;
+                border: 0;
+                background-color: transparent;
+                width: 21rem;
+                margin-block-start: 3rem;
+                margin-inline-end: 5rem;
+
+                @media #{$medish} {
+                  float: right;
+                }
+
+                &:before {
+                  content: "";
+                  position: relative;
+                  background-image: image-url('360.png');
+                  background-repeat: no-repeat;
+                  background-size: 6.5rem;
+                  width: 6.5rem;
+                  height: 3.5rem;
+                  display: inline-block;
+                }
+
+                > span {
+                  color: var(--sea);
+                  font-weight: 600;
+                  width: 15rem;
+                }
+              }
+
+              // Overlay
+              .overlay--360 {
+                display: none;
+
+                &.opened {
+                  position: fixed;
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  z-index: 502; // Covers drupal admin for close button
+                  display: block;
+                  height: 100%;
+                  width: 100%;
+                  background-color: var(--white);
+
+                  span.overlay-title {
+                    text-align: left;
+                    float: left;
+                    width: 100%;
+                    margin-inline-start: 8%;
+                    margin-block-start: 7%;
+                    font-size: 2.6rem;
+                    font-weight: 700;
+                    color: var(--sea);
+                  }
+
+                  .overlay--close {
+                    position: absolute;
+                    top: 5.5rem;
+                    right: 3rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    cursor: pointer;
+
+                    span.close-x {
+                      font-size: 3rem;
+                      color: var(--sky);
+                    }
+
+                    span.close {
+                      font-size: 1.4rem;
+                      font-weight: 600;
+                    }
+                  }
+
+                  iframe {
+                    position: absolute;
+                    height: 60%;
+                    width: 80%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1;
+                  }
+
+                  &:before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background-image: image-url('dots-desktop.svg');
+                    background-repeat: no-repeat;
+                    background-size: 36.5rem;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 0;
+                  }
+
+                  &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    background-image: image-url('dots-desktop.svg');
+                    background-repeat: no-repeat;
+                    background-size: 36.5rem;
+                    width: 40rem;
+                    height: 40rem;
+                    z-index: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .info, .map, .profile-slider {
+          flex: 1;
+        }
+
+        > .profile-slider{
+          order: 1;
+          display: block;
+
+          img {
+            width: 100%;
+          }
+        }
+
+      }
+
+      @media #{$medish} {
+        .bottom {
+          display: flex;
+          flex-direction: row;
+          top: 0;
+
+          .info {
+            order: 2;
+            margin-block-start: 0;
+
+            .content {
+              max-height: 100%;
+            }
+          }
+
+          .map {
+            display: flex;
+            flex-direction: column-reverse;
+            max-width: 53rem;
+
+            .views-map-view {
+              flex: 1;
+            }
+
+            .profile-slider {
+              display: block;
+              flex: unset;
+
+              img {
+                display: block;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+
+          > .profile-slider {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

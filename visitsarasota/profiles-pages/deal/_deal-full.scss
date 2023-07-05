@@ -1,0 +1,190 @@
+.node--deal--full {
+  @include center-me(128rem);
+  overflow: hidden;
+
+  .deal-container {
+    margin-inline: 2rem;
+    display: inline;
+
+    .bottom {
+      position: relative;
+
+      .info {
+        background-color: var(--white);
+        margin-inline: 2.5rem;
+
+        .content {
+          display: flex;
+          flex-direction: column;
+
+          .title {
+            font-size: 4.2rem;
+            color: var(--stone);
+            line-height: calc(50 / 42);
+            letter-spacing: 1.26px;
+            margin-block: 1rem 2rem;
+            flex: 1;
+            width: 100%;
+          }
+
+          .start-end-date {
+            color: var(--sea);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-block-end: 1rem;
+          }
+
+          a.go-alldates {
+            text-decoration: none;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--sea);
+            margin-block-end: 2rem;
+          }
+
+          .cta {
+            > a {
+              margin-inline-end: 1.5rem;
+            }
+          }
+
+          .address, .phone, .email {
+            color: var(--stone);
+            font-size: 1.8rem;
+            line-height: calc(20 / 18);
+            margin-block: 0.5rem;
+
+            &:before {
+              content: "";
+              position: relative;
+              top: 0;
+              left: 0;
+              background-image: image-url('location-dot-regular.svg');
+              background-repeat: no-repeat;
+              background-position: left center;
+              background-size: 1.5rem;
+              width: 1.5rem;
+              height: 1.5rem;
+              padding-inline-end: 2.5rem;
+            }
+          }
+
+          .address {
+            &:before {
+              background-image: image-url('location-dot-regular.svg');
+            }
+          }
+
+          .phone {
+            &:before {
+              background-image: image-url('phone-light.svg');
+            }
+          }
+
+          .email {
+            &:before {
+              background-image: image-url('envelope-regular.svg');
+            }
+          }
+
+          .phone, .email {
+            a {
+              text-decoration: none;
+            }
+          }
+
+          .social-media {
+            margin-block: 2rem;
+
+            a.facebook {
+              background-image: image-url('ftr-fb.png');
+            }
+
+            a.twitter {
+              background-image: image-url('ftr-tw.png');
+            }
+
+            a.youtube {
+              background-image: image-url('ftr-yt.png');
+            }
+
+            a.instagram {
+              background-image: image-url('ftr-ig.png');
+            }
+
+            a {
+              display: inline-block;
+              width: 4rem;
+              height: 4rem;
+              background-size: 100%;
+              background-repeat: no-repeat;
+              border-radius: 50%;
+              text-decoration: none;
+              margin-inline-end: 0.5rem;
+
+              &:hover {
+                background-color: color-mix(in srgb, var(--sky) 15%, var(--white));
+              }
+
+              span {
+                position: absolute !important;
+                height: 1px;
+                width: 1px;
+                overflow: hidden;
+                clip: rect(1px, 1px, 1px, 1px);
+                word-wrap: normal;
+              }
+            }
+          }
+
+          .description {
+            font-size: 1.6rem;
+            line-height: calc(24 / 16);
+            margin-block: 1rem 3rem;
+          }
+        }
+      }
+
+      .image {
+        display: block;
+
+        img {
+          width: 100%;
+          object-fit: cover;
+          margin: 0 auto;
+
+          @media #{$small} {
+            width: 80%;
+          }
+        }
+      }
+
+      @media #{$medish} {
+        display: flex;
+        flex-direction: row;
+
+        .info {
+          width: 57%;
+          padding-inline-start: 4.5rem;
+          margin-inline: unset;
+
+          .content {
+            overflow: auto;
+            max-height: 77rem;
+            padding-inline-end: 4rem;
+          }
+        }
+
+        .image {
+          width: 43%;
+          min-height: 32rem;
+          margin-inline-start: 0;
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
