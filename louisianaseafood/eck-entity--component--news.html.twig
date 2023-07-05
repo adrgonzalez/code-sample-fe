@@ -1,0 +1,18 @@
+{{ attach_library('mmg9/news-release') }}
+{% if content.field_news_release[0].contents["#display_id"] == 'block_short_news' %}
+  {% set class = "block-short-news" %}
+{% else %}
+  {% set class = "block-all-news" %}
+{% endif %}
+
+<div {{ attributes.addClass(class) }} data-component-class="component--{{ theme_helpers.bundle }}" data-entity-id="{{ theme_helpers.eid }}">
+  {{ title_suffix }}
+  <div class="news">
+    <div class="title">
+      {{ content.field_news_display_title|field_value }}
+      <span class="image-parent" style="background-image:url({{ file_url(content.field_news_bg_image['#blazy']['_uri']) }});"></span>
+    </div>
+    <div class="cards">{{ content.field_news_release }}</div>
+    <div class="cta">{{ content.field_news_cta|field_value }}</div>
+  </div>
+</div>
