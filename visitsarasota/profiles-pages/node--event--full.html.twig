@@ -1,0 +1,217 @@
+{{ attach_library('mmg9/event-full') }}
+
+{%
+  set classes = [
+  'node--' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--' ~ node.bundle|clean_class ~ '--' ~ view_mode|clean_class : 'node--' ~ node.bundle|clean_class,
+]
+%}
+<article data-lat="{{ node.field_lat_long.lat }}" data-lon="{{ node.field_lat_long.lon }}" {{ attributes.addClass(classes) }}>
+  <div class="event-container">
+    <div class="top">
+      <div class="event-slider">
+        {% if (content.field_images.0) %}
+          {{ content.field_images }}
+        {% else %}
+          {{ content.field_listing_main_image }}
+        {% endif %}
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="info">
+        <div class="header">
+          <div class="slider-nav">
+            <div class="slick-dots-events"></div>
+          </div>
+          {% if listing.i360s.0 %}
+            <div class="tour" id="tour-360">
+              <div class="i360-wrapper">
+                <button class="button--360"><span>{{ 'Take a Virtual Tour' |t }}</span></button>
+                <div class="overlay--360">
+                  <span class="overlay-title">{{ listing.listing.0.name }}</span>
+                  <div class="overlay--close">
+                    <span class="close-x">x</span>
+                    <span class="close">{{ 'CLOSE' |t }}</span></div>
+                  {{ listing.i360s.0.url | raw }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class="content">
+          <span class="title">{{ listing.listing.0.name }}</span>
+
+          {% if content.field_start_date.0 and content.field_end_date.0 %}
+            <span class="start-end-date">
+              {{ content.field_start_date.0['#markup']|date("F d") }} -
+              {{ content.field_end_date.0['#markup']|date("F d") }}, {{ content.field_end_date.0['#markup']|date("Y") }}
+            </span>
+          {% else %}
+            <span class="start-end-date">
+              {{ listing.listing.0.start_date|date("F d") }} -
+              {{ listing.listing.0.end_date|date("F d") }}, {{ listing.listing.0.end_date|date("Y") }}
+            </span>
+          {% endif %}
+
+          <a class="go-alldates" href="#all-dates">{{ 'See All Dates'|t }}</a>
+
+          {% if listing.listing.0.business_url or listing.listing.0.booking_url or content.field_listing_get_tickets.0 or content.field_listing_visit_website.0 %}
+            <div class="cta">
+              {% if listing.listing.0.business_url %}
+                <a class="pa-btn" href="{{ listing.listing.0.business_url }}">
+                  {{ 'Visit Website' |t }}
+                </a>
+              {% else %}
+                <a class="pa-btn" href="{{ content.field_listing_get_tickets.0['#url'] }}">
+                  {{ 'Visit Website' |t }}
+                </a>
+              {% endif %}
+              {% if listing.listing.0.booking_url %}
+                <a class="pa-btn" href="{{ listing.listing.0.booking_url }}">
+                  {{ 'Get Tickets' |t }}
+                </a>
+              {% else %}
+                <a class="pa-btn" href="{{ content.field_listing_visit_website.0['#url'] }}">
+                  {{ 'Get Tickets' |t }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if listing.listing.0.address %}
+            <span class="address">
+              {{ listing.listing.0.address ~ ', ' ~
+              listing.listing.0.city ~ ', ' ~
+              listing.listing.0.state ~ listing.listing.0.zip  }}
+            </span>
+          {% else %}
+            <span class="address">
+              {{ content.field_listing_address.0['address_line1']['#value'] ~ ', ' ~
+              content.field_listing_address.0['locality']['#value'] ~ ', ' ~
+              content.field_listing_address.0['administrative_area']['#value'] ~ content.field_listing_address.0['postal_code']['#value'] }}
+            </span>
+          {% endif %}
+
+          {% if listing.listing.0.local_phone %}
+            <span class="phone"><a href="tel:{{ listing.listing.0.local_phone }}">{{ listing.listing.0.local_phone }}</a></span>
+          {% endif %}
+
+          {% if listing.listing.0.business_email %}
+            <span class="email"><a href="mailto: {{ listing.listing.0.business_email }}">{{ listing.listing.0.business_email }}</a></span>
+          {% endif %}
+          {% if listing.social_media %}
+            <div class="social-media">
+              {% for key in listing.social_media|keys %}
+                {% if listing.social_media[key].website == 'Facebook' %}
+                  <a href="{{ listing.social_media[key].url }}" class="facebook" aria-label="Connect with us on Facebook" data-drupal-link-system-path="<front>">
+                    <span>Facebook</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Instagram' %}
+                  <a href="{{ listing.social_media[key].url }}" class="instagram" aria-label="Connect with us on Instagram" data-drupal-link-system-path="<front>">
+                    <span>Instagram</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Twitter' %}
+                  <a href="{{ listing.social_media[key].url }}" class="twitter" aria-label="Connect with us on Twitter" data-drupal-link-system-path="<front>">
+                    <span>Twitter</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Youtube' %}
+                  <a href="{{ listing.social_media[key].url }}" class="youtube" aria-label="Connect with us on Youtube" data-drupal-link-system-path="<front>">
+                    <span>Youtube</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Pinterest' %}
+                  <a href="{{ listing.social_media[key].url }}" class="pinterest" aria-label="Connect with us on Pinterest" data-drupal-link-system-path="<front>">
+                    <span>Pinterest</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Flickr' %}
+                  <a href="{{ listing.social_media[key].url }}" class="flickr" aria-label="Connect with us on Flickr" data-drupal-link-system-path="<front>">
+                    <span>Flickr</span>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if listing.descriptions.0.description %}
+            <span class="description">{{ listing.descriptions.0.description|raw|striptags }}</span>
+          {% endif %}
+
+          {% if listing.event_dates or listing.rates %}
+            <div class="details">
+              <span>{{ 'Details'|t }}</span>
+              {% if listing.event_dates %}
+                <div class="detail-wrapper">
+                  <div class="detail">
+                    <p id="all-dates">{{ 'All Dates'|t }}</p>
+                    <ul>
+                      {% for key in listing.event_dates|keys %}
+                        <li class="date">
+                          {{ listing.event_dates[key].event_date|date("l, F d, Y") }}
+                          {{ listing.event_dates[key].start_time|date("ha-") }}
+                          {{ listing.event_dates[key].end_time|date("ha") }}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if listing.rates %}
+                <div class="detail-wrapper">
+                  <div class="detail">
+                    <p>{{ 'Admission Rates'|t }}</p>
+                    <ul>
+                      {% for key in listing.rates|keys %}
+                        <li>
+{#                          name : "Ticket"#}
+{#                          average_rate : "30.00"#}
+{#                          low_season : null#}
+{#                          high_season : null#}
+{#                          frequency : null#}
+                          {{ listing.rates[key].name|title }}:
+                          ${{ listing.rates[key].average_rate }}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="map">
+        <div class="views-map-view">
+          <div id="listings-map"></div>
+        </div>
+        <div class="event-slider">
+          {% if content.field_images.0 %}
+            {{ content.field_images }}
+          {% else %}
+            {{ content.field_listing_main_image }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="event-slider">
+        {% if content.field_images.0 %}
+          {{ content.field_images }}
+        {% else %}
+          {{ content.field_listing_main_image }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {#  </div>#}
+</article>

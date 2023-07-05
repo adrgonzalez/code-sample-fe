@@ -1,0 +1,143 @@
+{{ attach_library('mmg9/deal-full') }}
+
+{%
+  set classes = [
+  'node--' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--' ~ node.bundle|clean_class ~ '--' ~ view_mode|clean_class : 'node--' ~ node.bundle|clean_class,
+]
+%}
+
+{#    {{ dd(content) }}#}
+{#    {{ dd(listing) }}#}
+
+<article data-lat="{{ node.field_lat_long.lat }}" data-lon="{{ node.field_lat_long.lon }}" {{ attributes.addClass(classes) }}>
+  <div class="deal-container">
+    <div class="bottom">
+      <div class="info">
+        <div class="content">
+          <span class="title">{{ listing.title }}</span>
+
+          {% if content.field_start_date.0 and content.field_end_date.0 %}
+            <span class="start-end-date">
+              {{ content.field_start_date.0['#markup']|date("F d") }} -
+              {{ content.field_end_date.0['#markup']|date("F d") }}, {{ content.field_end_date.0['#markup']|date("Y") }}
+            </span>
+          {% else %}
+            <span class="start-end-date">
+              {{ listing.start_date|date("F d") }} -
+              {{ listing.end_date|date("F d") }}, {{ listing.end_date|date("Y") }}
+            </span>
+          {% endif %}
+
+          <a class="go-alldates" href="#all-dates">{{ 'See All Dates'|t }}</a>
+
+          {% if listing.business_url or listing.booking_url or content.field_listing_get_tickets.0 or content.field_listing_visit_website.0 %}
+            <div class="cta">
+              {% if listing.business_url %}
+                <a class="pa-btn" href="{{ listing.business_url }}">
+                  {{ 'Visit Website' |t }}
+                </a>
+              {% else %}
+                <a class="pa-btn" href="{{ content.field_listing_get_tickets.0['#url'] }}">
+                  {{ 'Visit Website' |t }}
+                </a>
+              {% endif %}
+              {% if listing.booking_url %}
+                <a class="pa-btn" href="{{ listing.booking_url }}">
+                  {{ 'Get Tickets' |t }}
+                </a>
+              {% else %}
+                <a class="pa-btn" href="{{ content.field_listing_visit_website.0['#url'] }}">
+                  {{ 'Get Tickets' |t }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if listing.address %}
+            <span class="address">
+              {{ listing.address ~ ', ' ~
+              listing.city ~ ', ' ~
+              listing.state ~ listing.zip  }}
+            </span>
+          {% else %}
+            <span class="address">
+              {{ content.field_listing_address.0['address_line1']['#value'] ~ ', ' ~
+              content.field_listing_address.0['locality']['#value'] ~ ', ' ~
+              content.field_listing_address.0['administrative_area']['#value'] ~ content.field_listing_address.0['postal_code']['#value'] }}
+            </span>
+          {% endif %}
+
+          {% if listing.phone %}
+            <span class="phone"><a href="tel:{{ listing.phone }}">{{ listing.phone }}</a></span>
+          {% endif %}
+
+          {% if listing.email %}
+            <span class="email"><a href="mailto: {{ listing.email }}">{{ listing.email }}</a></span>
+          {% endif %}
+
+          {% if listing.social_media %}
+            <div class="social-media">
+              {% for key in listing.social_media|keys %}
+                {% if listing.social_media[key].website == 'Facebook' %}
+                  <a href="{{ listing.social_media[key].url }}" class="facebook" aria-label="Connect with us on Facebook" data-drupal-link-system-path="<front>">
+                    <span>Facebook</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Instagram' %}
+                  <a href="{{ listing.social_media[key].url }}" class="instagram" aria-label="Connect with us on Instagram" data-drupal-link-system-path="<front>">
+                    <span>Instagram</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Twitter' %}
+                  <a href="{{ listing.social_media[key].url }}" class="twitter" aria-label="Connect with us on Twitter" data-drupal-link-system-path="<front>">
+                    <span>Twitter</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Youtube' %}
+                  <a href="{{ listing.social_media[key].url }}" class="youtube" aria-label="Connect with us on Youtube" data-drupal-link-system-path="<front>">
+                    <span>Youtube</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Pinterest' %}
+                  <a href="{{ listing.social_media[key].url }}" class="pinterest" aria-label="Connect with us on Pinterest" data-drupal-link-system-path="<front>">
+                    <span>Pinterest</span>
+                  </a>
+                {% endif %}
+
+                {% if listing.social_media[key].website == 'Flickr' %}
+                  <a href="{{ listing.social_media[key].url }}" class="flickr" aria-label="Connect with us on Flickr" data-drupal-link-system-path="<front>">
+                    <span>Flickr</span>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if listing.listing.full_description %}
+            <span class="description">{{ listing.full_description }}</span>
+          {% else %}
+            <span class="description">{{ content.body.0['#text'] }}</span>
+          {% endif %}
+
+        </div>
+      </div>
+      <div class="image">
+        {% if (content.field_images.0) %}
+          {{ content.field_images }}
+        {% else %}
+          {{ content.field_listing_main_image }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {#  </div>#}
+</article>
+
