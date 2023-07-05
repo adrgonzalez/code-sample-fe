@@ -1,0 +1,108 @@
+// import config
+// to be able to attach this to the template it
+// needs to be a standalone sass file, not a partial
+// so we lose the niceties of inheriting these things.
+//
+@import '../../config';
+@import '../../mixins';
+
+.component--listings {
+  padding-block: 4rem 3rem;
+
+  > .content {
+    .field--name-field-listings-cta {
+      a {
+        @include button;
+      }
+    }
+
+    .intro {
+      padding-inline: 2.5rem;
+      padding-block: 0 1.5rem;
+
+      h3 {
+        font-size: 5.6rem;
+        line-height: 1;
+        padding: 0;
+        font-family: var(--nobel-cn);
+        text-transform: uppercase;
+
+        .field--name-field-listings-title {
+          line-height: calc(72 / 56);
+        }
+
+        .field--name-field-listings-title-script-text {
+          font-family: var(--billyoh);
+          font-size: 4.1rem;
+          line-height: calc(74 / 41);
+          text-transform: none;
+          font-weight: 400;
+          color: var(--vi-navy);
+          padding-inline: 2rem 0;
+          margin-block: -2rem 0;
+        }
+      }
+
+      .field--name-field-listings-cta {
+        display: none;
+      }
+    }
+
+    .mmg8-listings-filtered-view {
+      padding-inline: 1.7rem 0;
+    }
+
+    > .field--name-field-listings-cta {
+      padding-block: 1rem;
+      text-align: center;
+    }
+  }
+
+  @media #{$large} {
+    > .content {
+      .intro {
+        @include center-me(128rem);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 1rem;
+        padding-inline: 8rem;
+        padding-block: 0;
+
+        h3 {
+          font-size: 6.4rem;
+          padding-right: 3rem;
+
+          .field--name-field-listings-title {
+            line-height: calc(82 / 64);
+          }
+
+          .field--name-field-listings-title-script-text {
+            font-size: 5.2rem;
+            line-height: calc(94 / 52);
+            padding-inline: 0;
+            text-align: right;
+            margin-inline: 0 -3rem;
+            margin-block: -2.5rem 0;
+          }
+        }
+
+        .field--name-field-listings-cta {
+          display: inline-block;
+          flex: 0 0 auto;
+          padding-block: 2rem 0;
+        }
+      }
+
+      .mmg8-listings-filtered-view {
+        padding-inline: 9rem 0;
+      }
+
+      > .field--name-field-listings-cta {
+        display: none;
+      }
+    }
+  }
+}
+
+//@import 'node--listing--teaser';
+//@import 'slick-elements';

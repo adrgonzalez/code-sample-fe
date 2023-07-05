@@ -1,0 +1,32 @@
+{{ attach_library('mmg9/slick') }}
+{{ attach_library('mmg9/related-content') }}
+<div {{ attributes.addClass(classes) }} data-component-class="component--{{ theme_helpers.bundle }}" data-entity-id="{{ theme_helpers.eid }}">
+  {% if content.field_related_content_bg_image|render %}
+  <img class="related-bg" src="{{ file_url(content.field_related_content_bg_image['#blazy']['_uri']) }}"
+       alt="">
+  {% endif %}
+
+  <div class="related-wrap">
+    <div class="title-wrap">
+
+      <div class="title">
+        {% if content.field_related_content_eyebrow|render or content.field_rc_title_formatted|render %}
+        <h3>
+          {% if content.field_related_content_eyebrow|render %}
+          <div class="eyebrow"><span>{{ content.field_related_content_eyebrow|render|striptags }}</span></div>
+          {% endif %}
+          {% if content.field_rc_title_formatted|render %}
+          <div>{{ content.field_rc_title_formatted|field_value|raw }}</div>
+          {% endif %}
+        </h3>
+        {% endif %}
+      </div>
+      <div class="arrows-wrap arrows-wrap-{{ theme_helpers.eid }}"></div>
+      <div class="arrows-wrap-too arrows-wrap-too-{{ theme_helpers.eid }}"></div>
+    </div>
+    <div class="related-list">
+      {{ content.mmg8_related_content_related_content_view }}
+      {{ content.field_related_content }}
+    </div>
+  </div>
+</div>
