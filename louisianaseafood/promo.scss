@@ -1,0 +1,182 @@
+@import '../../config';
+@import '../../mixins';
+
+.component--promo {
+  @include center-me(128rem);
+  .field--name-field-promo-items {
+    .paragraph--type--promo-item {
+      font-family: $poppins;
+      color: $white;
+      background-color: $aqua-green;
+      width: 37.5rem;
+      height: 43rem;
+      margin: 0 auto 2px;
+      padding: 2.5rem 2.5rem 0 2rem;
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 16rem;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: image-url('wave-mobile.svg') center bottom;
+      }
+
+      .title {
+        font-size: 2.6rem;
+        line-height: calc(32 / 26);
+      }
+
+      .description {
+        max-height: 9.5rem;
+        margin: 1rem 0 3rem 0;
+        overflow: hidden;
+        line-height: calc(24 / 16);
+      }
+
+      .cta {
+        a {
+          @include laButton($white, $aqua-green, $sunflower, $aqua-green);
+        }
+      }
+
+      .image {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        &::after {
+          background-color: $white;
+          content: '';
+          display: block;
+          position: absolute;
+          width: 20.2rem;
+          height: 17.2rem;
+          bottom: 0;
+          right: 0;
+          clip-path: circle(67.1% at 63% 74%);
+        }
+
+        img {
+          width: 20rem;
+          height: 17rem;
+          object-fit: cover;
+          clip-path: circle(67.1% at 63% 74%);
+          position: relative;
+          z-index: 1;
+        }
+      }
+    }
+
+    div:first-child {
+      .paragraph--type--promo-item {
+        background-color: $ferrari;
+      }
+    }
+  }
+  @media #{$x-large} {
+    max-width: unset;
+    text-align: center;
+
+    .field--name-field-promo-items {
+      width: 100%;
+      height: 33rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+
+      .container-full {
+        width: 100%;
+        background-color: $aqua-green;
+        text-align: left;
+
+        .paragraph--type--promo-item {
+          width: 63.6rem;
+          height: 33rem;
+          margin: 0 -5px 0 1px;
+          display: inline-block;
+
+          &::after {
+            background: unset;
+          }
+
+          .container-large {
+            float: right;
+            width: 33rem;
+          }
+
+          .title {
+            font-weight: 600;
+          }
+
+          .image {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            &::after {
+              height: 33rem;
+              width: 24rem;
+              bottom: 0;
+              left: 3px;
+              clip-path: circle(83% at 0 50%);
+            }
+
+            img {
+              clip-path: circle(83% at 0 50%);
+              height: 33rem;
+              width: 24rem;
+            }
+          }
+        }
+      }
+
+      > div:first-child {
+        display: block;
+        text-align: right;
+        background-color: $ferrari;
+        margin-right: 1rem;
+
+        .paragraph--type--promo-item {
+          &::after {
+            background: image-url('spatter.png') right bottom no-repeat;
+            background-size: 40rem;
+            height: 100%;
+          }
+        }
+      }
+
+      > div:nth-child(2) {
+        .paragraph--type--promo-item {
+          .container-large {
+            float: left;
+          }
+
+          .image {
+            position: absolute;
+            top: 0;
+            left: inherit;
+
+            &::after {
+              clip-path: circle(84% at 96% 72%);
+              height: 33rem;
+              width: 26rem;
+              bottom: 0;
+              left: inherit;
+              right: 3px;
+            }
+
+            img {
+              clip-path: circle(84% at 96% 72%);
+              height: 33rem;
+              width: 26rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
