@@ -22,12 +22,12 @@ https://visitnebraska.com/
 https://www.visitusvi.com/
 
 
-Microsites
+Microsites, developedfrom scratch
 
 http://live-arizona-university.pantheonsite.io/
 
 https://www.juniuni.ai/
 
-http://live-studyme.pantheonsite.io/
+https://studyme.com/
 
 https://live-toledo-university.pantheonsite.io/
